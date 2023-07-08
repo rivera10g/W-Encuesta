@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="eWMS.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_CAMPOS_ENCUESTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ENCUESTAID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TITULO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ESREQUERIDO" Type="bit" Nullable="false" />
+          <Property Name="TIPOCAMPO" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ENCUESTAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LINKUNICO" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CAMPOSENC__ENCUE__25869641">
+          <End Role="TBL_ENCUESTAS" Type="Self.TBL_ENCUESTAS" Multiplicity="1" />
+          <End Role="TBL_CAMPOS_ENCUESTA" Type="Self.TBL_CAMPOS_ENCUESTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ENCUESTAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_CAMPOS_ENCUESTA">
+              <PropertyRef Name="ENCUESTAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="eWMSModelStoreContainer">
+          <EntitySet Name="TBL_CAMPOS_ENCUESTA" EntityType="Self.TBL_CAMPOS_ENCUESTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ENCUESTAS" EntityType="Self.TBL_ENCUESTAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CAMPOSENC__ENCUE__25869641" Association="Self.FK__CAMPOSENC__ENCUE__25869641">
+            <End Role="TBL_ENCUESTAS" EntitySet="TBL_ENCUESTAS" />
+            <End Role="TBL_CAMPOS_ENCUESTA" EntitySet="TBL_CAMPOS_ENCUESTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eWMS.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="eWMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_CAMPOS_ENCUESTA" EntityType="eWMS.Model.TBL_CAMPOS_ENCUESTA" />
+          <EntitySet Name="TBL_ENCUESTAS" EntityType="eWMS.Model.TBL_ENCUESTAS" />
+          <AssociationSet Name="FK__CAMPOSENC__ENCUE__25869641" Association="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641">
+            <End Role="TBL_ENCUESTAS" EntitySet="TBL_ENCUESTAS" />
+            <End Role="TBL_CAMPOS_ENCUESTA" EntitySet="TBL_CAMPOS_ENCUESTA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TBL_CAMPOS_ENCUESTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ENCUESTAID" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TITULO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ESREQUERIDO" Type="Boolean" Nullable="false" />
+          <Property Name="TIPOCAMPO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBL_ENCUESTAS" Relationship="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641" FromRole="TBL_CAMPOS_ENCUESTA" ToRole="TBL_ENCUESTAS" />
+        </EntityType>
+        <EntityType Name="TBL_ENCUESTAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LINKUNICO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBL_CAMPOS_ENCUESTA" Relationship="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641" FromRole="TBL_ENCUESTAS" ToRole="TBL_CAMPOS_ENCUESTA" />
+        </EntityType>
+        <Association Name="FK__CAMPOSENC__ENCUE__25869641">
+          <End Type="eWMS.Model.TBL_ENCUESTAS" Role="TBL_ENCUESTAS" Multiplicity="1" />
+          <End Type="eWMS.Model.TBL_CAMPOS_ENCUESTA" Role="TBL_CAMPOS_ENCUESTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ENCUESTAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_CAMPOS_ENCUESTA">
+              <PropertyRef Name="ENCUESTAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eWMSModelStoreContainer" CdmEntityContainer="eWMSEntities">
+          <EntitySetMapping Name="TBL_CAMPOS_ENCUESTA">
+            <EntityTypeMapping TypeName="eWMS.Model.TBL_CAMPOS_ENCUESTA">
+              <MappingFragment StoreEntitySet="TBL_CAMPOS_ENCUESTA">
+                <ScalarProperty Name="TIPOCAMPO" ColumnName="TIPOCAMPO" />
+                <ScalarProperty Name="ESREQUERIDO" ColumnName="ESREQUERIDO" />
+                <ScalarProperty Name="TITULO" ColumnName="TITULO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ENCUESTAID" ColumnName="ENCUESTAID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ENCUESTAS">
+            <EntityTypeMapping TypeName="eWMS.Model.TBL_ENCUESTAS">
+              <MappingFragment StoreEntitySet="TBL_ENCUESTAS">
+                <ScalarProperty Name="LINKUNICO" ColumnName="LINKUNICO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

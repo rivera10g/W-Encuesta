@@ -1,0 +1,18 @@
+------------------------SQL:
+
+  <connectionStrings>
+    <!--CONN-->
+    <add name="eWMSEntities" connectionString="metadata=res://*/models.entity.ewmsModel.csdl|res://*/models.entity.ewmsModel.ssdl|res://*/models.entity.ewmsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(localdb)\TEST;initial catalog=DB_SLEVEL;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="eWMS_CompanyConnectionString" connectionString="Data Source=(localdb)\TEST;Initial Catalog=DB_SLEVEL;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+SERVER: (localdb)\TEST
+DB: DB_SLEVE
+No cuesta con password.
+
+------------------------JWT (AUTENTICACION):
+USUARIO: puede ser cualquiera
+PASSWORD: 123456 (obligatoriamente)
+POSTMAN: http://localhost:9762 (obligatoriamente)
+
+Si se desea cambiar PASSWORD o la ruta de POSTMAN, se debe cambiar en Web.Config del API.

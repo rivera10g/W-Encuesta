@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eWMS.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="eWMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_CAMPOS_ENCUESTA" EntityType="eWMS.Model.TBL_CAMPOS_ENCUESTA" />
+    <EntitySet Name="TBL_ENCUESTAS" EntityType="eWMS.Model.TBL_ENCUESTAS" />
+    <AssociationSet Name="FK__CAMPOSENC__ENCUE__25869641" Association="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641">
+      <End Role="TBL_ENCUESTAS" EntitySet="TBL_ENCUESTAS" />
+      <End Role="TBL_CAMPOS_ENCUESTA" EntitySet="TBL_CAMPOS_ENCUESTA" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBL_CAMPOS_ENCUESTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ENCUESTAID" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TITULO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ESREQUERIDO" Type="Boolean" Nullable="false" />
+    <Property Name="TIPOCAMPO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBL_ENCUESTAS" Relationship="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641" FromRole="TBL_CAMPOS_ENCUESTA" ToRole="TBL_ENCUESTAS" />
+  </EntityType>
+  <EntityType Name="TBL_ENCUESTAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LINKUNICO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBL_CAMPOS_ENCUESTA" Relationship="eWMS.Model.FK__CAMPOSENC__ENCUE__25869641" FromRole="TBL_ENCUESTAS" ToRole="TBL_CAMPOS_ENCUESTA" />
+  </EntityType>
+  <Association Name="FK__CAMPOSENC__ENCUE__25869641">
+    <End Type="eWMS.Model.TBL_ENCUESTAS" Role="TBL_ENCUESTAS" Multiplicity="1" />
+    <End Type="eWMS.Model.TBL_CAMPOS_ENCUESTA" Role="TBL_CAMPOS_ENCUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ENCUESTAS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_CAMPOS_ENCUESTA">
+        <PropertyRef Name="ENCUESTAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
